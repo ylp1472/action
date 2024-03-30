@@ -1,14 +1,13 @@
 name: FlutterCI
 
 on:
- push:
-    branches: [ master ]
  pull_request:
-    branches: [ master ]
+    branches:
+      - master
+    types: [opened, synchronize, reopened]
 
 jobs:
  build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -23,8 +22,3 @@ jobs:
     - run: flutter format --set-exit-if-changed .
     - run: flutter analyze .
     - run: flutter test
-    - run: flutter build apk --release
-    - uses: actions/upload-artifact@v2
-      with:
-        name: app-release.apk
-        path: build/app/outputs/flutter-apk/app-release.apk
